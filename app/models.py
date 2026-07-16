@@ -95,7 +95,7 @@ class Node(Base):
     order_index = Column(Integer, nullable=False)
 
     version = relationship("DocumentVersion", back_populates="nodes")
-    children = relationship("Node", backref="parent", remote_side=[id])
+    parent = relationship("Node", remote_side=[id], backref="children")
 
     def to_dict(self, include_children: bool = False):
         d = {
