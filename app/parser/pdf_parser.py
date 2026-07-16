@@ -106,6 +106,17 @@ def extract_lines(pdf_path: str) -> list[RawLine]:
                 text = "".join(c["text"] for c in chars).strip()
                 if not text:
                     continue
+                # Some page layouts extract a lone soft-hyphen artifact
+                # as its own "line" (seen empirically comparing v1 vs
+                # v2 of this manual - a hyphenated line-wrap sometimes
+                # produces a standalone '-' line depending on how text
+                # reflows across the page break). This has no semantic
+                # content and, left in, causes a node's content hash to
+                # differ between versions even when nothing meaningful
+                # changed. We treat a line that is ONLY hyphen/soft-hyphen
+                # characters as noise and skip it.
+                if clean_text(text).strip("-") == "":
+                    continue
                 # A line counts as bold if the majority of its
                 # (non-trivial) characters come from a "Bold" font name.
                 bold_chars = sum(1 for c in chars if "Bold" in c.get("fontname", ""))
