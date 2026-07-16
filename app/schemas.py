@@ -55,3 +55,33 @@ class DocumentVersionSummary(BaseModel):
 class IngestVersionRequest(BaseModel):
     pdf_path: str
     source_filename: str | None = None
+
+
+class SelectionNodeInput(BaseModel):
+    """A single node+version pin submitted when creating a selection."""
+    node_id: str
+    version_id: str
+
+
+class CreateSelectionRequest(BaseModel):
+    name: str
+    nodes: list[SelectionNodeInput]
+
+
+class SelectionNodeResponse(BaseModel):
+    node_id: str
+    version_id: str
+    heading: str
+    numbering: str
+
+    class Config:
+        from_attributes = True
+
+
+class SelectionResponse(BaseModel):
+    id: str
+    name: str
+    nodes: list[SelectionNodeResponse]
+
+    class Config:
+        from_attributes = True

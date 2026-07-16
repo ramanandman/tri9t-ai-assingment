@@ -8,7 +8,7 @@ Then open http://127.0.0.1:8000/docs for interactive API docs.
 from fastapi import FastAPI
 
 from app.database import init_db
-from app.routes import documents, nodes
+from app.routes import documents, nodes, selections
 
 app = FastAPI(title="CT-200 Manual QA System", version="1.0.0")
 
@@ -25,3 +25,4 @@ def health():
 
 app.include_router(documents.router)
 app.include_router(nodes.router)
+app.include_router(selections.router)
