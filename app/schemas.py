@@ -85,3 +85,17 @@ class SelectionResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class TestCaseResponse(BaseModel):
+    title: str
+    preconditions: list[str]
+    steps: list[str]
+    expected_result: str
+
+
+class GenerationResponse(BaseModel):
+    id: str
+    selection_id: str
+    generated_at: str
+    test_cases: list[TestCaseResponse]

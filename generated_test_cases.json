@@ -1,0 +1,92 @@
+{
+  "ab5312b3-e3db-4b75-806e-a9a2063c2739": {
+    "id": "ab5312b3-e3db-4b75-806e-a9a2063c2739",
+    "selection_id": "0d6a2a7e-b09b-4b28-ba07-8e4d481498ee",
+    "generated_at": "2026-07-17T02:46:26.140592+00:00",
+    "source_nodes": [
+      {
+        "node_id": "e2a5712a-9db8-49e5-a1d6-7437a91befb7",
+        "version_id": "e8992f57-5aac-4272-b6b0-f519a911a997",
+        "numbering": "4.1",
+        "content_hash": "469bef5489b6686e6f326e5d076462b23262ec147931a56e1eb28c836f703d08"
+      },
+      {
+        "node_id": "9a638b5a-d2b1-46f5-bc38-6db62f2591c3",
+        "version_id": "e8992f57-5aac-4272-b6b0-f519a911a997",
+        "numbering": "4.2",
+        "content_hash": "9bc417a1f05e15d11a9a3d55e07bef9e445283c8ecb4b0abfa498c78e1449417"
+      },
+      {
+        "node_id": "ed8fc2ab-a01c-43cd-8318-f8ff4bc98ec7",
+        "version_id": "e8992f57-5aac-4272-b6b0-f519a911a997",
+        "numbering": "4.3",
+        "content_hash": "d8275be434a720a2a4a67ad76ea0e7b05e0d2bfc7ca5f8ebf27c31a804939697"
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Overpressure Protection Test",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly connected"
+        ],
+        "steps": [
+          "Simulate cuff pressure exceeding 300 mmHg for longer than 3 seconds",
+          "Observe device behavior"
+        ],
+        "expected_result": "Emergency deflation valve is triggered, cuff is vented within 2 seconds"
+      },
+      {
+        "title": "Error Code E3 Test",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly connected"
+        ],
+        "steps": [
+          "Simulate overpressure condition",
+          "Observe device behavior"
+        ],
+        "expected_result": "Device auto-deflates within 1.5 seconds and displays E3"
+      },
+      {
+        "title": "Audible Alarm Test for E3 Error",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly connected",
+          "Audible alarms are enabled in settings"
+        ],
+        "steps": [
+          "Simulate overpressure condition",
+          "Observe device behavior"
+        ],
+        "expected_result": "Audible alarm sounds and E3 is displayed on the device"
+      },
+      {
+        "title": "Error Code E1 Test",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is not connected"
+        ],
+        "steps": [
+          "Initiate measurement",
+          "Observe device behavior"
+        ],
+        "expected_result": "Device aborts measurement and displays E1"
+      },
+      {
+        "title": "Silencing Audible Alarm Test",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly connected",
+          "Audible alarms are enabled in settings"
+        ],
+        "steps": [
+          "Disable audible alarm for E2 error in settings",
+          "Simulate motion artifact during measurement",
+          "Observe device behavior"
+        ],
+        "expected_result": "Device aborts measurement, displays E2, and does not sound an audible alarm"
+      }
+    ]
+  }
+}
