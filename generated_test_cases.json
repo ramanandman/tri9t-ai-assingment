@@ -88,5 +88,65 @@
         "expected_result": "Device aborts measurement, displays E2, and does not sound an audible alarm"
       }
     ]
+  },
+  "d0188cbb-5b25-4f24-9316-978b0bfb418a": {
+    "id": "d0188cbb-5b25-4f24-9316-978b0bfb418a",
+    "selection_id": "e2dc39ca-2b23-4464-85ea-f677ff04f5e2",
+    "generated_at": "2026-07-17T03:11:57.706311+00:00",
+    "source_nodes": [
+      {
+        "node_id": "e2a5712a-9db8-49e5-a1d6-7437a91befb7",
+        "version_id": "e8992f57-5aac-4272-b6b0-f519a911a997",
+        "numbering": "4.1",
+        "content_hash": "469bef5489b6686e6f326e5d076462b23262ec147931a56e1eb28c836f703d08"
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Overpressure Protection - Immediate Trigger",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly attached"
+        ],
+        "steps": [
+          "Increase cuff pressure to exceed 299 mmHg"
+        ],
+        "expected_result": "Emergency deflation valve triggers and cuff deflates within 2 seconds"
+      },
+      {
+        "title": "Overpressure Protection - Prolonged Exceedance",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly attached"
+        ],
+        "steps": [
+          "Increase cuff pressure to exceed 300 mmHg for longer than 3 seconds"
+        ],
+        "expected_result": "Emergency deflation valve triggers and cuff deflates within 2 seconds"
+      },
+      {
+        "title": "Overpressure Protection - Normal Operation",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly attached"
+        ],
+        "steps": [
+          "Increase cuff pressure to 299 mmHg or less"
+        ],
+        "expected_result": "Emergency deflation valve does not trigger and cuff continues to inflate"
+      },
+      {
+        "title": "Overpressure Protection - Sensor Fault",
+        "preconditions": [
+          "Device is turned on",
+          "Cuff is properly attached",
+          "Simulated sensor fault"
+        ],
+        "steps": [
+          "Increase cuff pressure to exceed 300 mmHg for longer than 3 seconds"
+        ],
+        "expected_result": "Emergency deflation valve triggers and cuff deflates within 2 seconds"
+      }
+    ]
   }
 }
